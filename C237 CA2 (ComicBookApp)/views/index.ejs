@@ -1,0 +1,60 @@
+<%- include('partials/head') %>
+
+<body>
+    <%- include('partials/navbar') %>
+    <main class="container mt-4">
+        <h1>Comic Catalogue</h1>
+
+        <% if (messages.length) { %>
+            <div class="alert alert-success">
+                <%= messages[0] %>
+            </div>
+        <% } %>
+
+        <% if (errors.length) { %>
+            <div class="alert alert-danger">
+                <%= errors[0] %>
+            </div>
+        <% } %>
+
+        <div class="row">
+            <% comics.forEach(comic => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="images/<%= comic.ImagePath %>" class="card-img-top" alt="<%= comic.Title %>">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <%= comic.Title %>
+                            </h5>
+                            <p class="card-text text-muted mb-1">
+                                <strong>Series:</strong> <%= comic.Series || '-' %>
+                            </p>
+                            <p class="card-text text-muted">
+                                <strong>Issue:</strong> <%= comic.IssueNo %>
+                            </p>
+                            
+                            <div class="mt-auto">
+                                <a href="/comic/<%= comic.ComicId %>" class="btn btn-primary w-100 mb-2">
+                                    View Comic
+                                </a>
+
+                                <% if (user.IsAdmin) { %>
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-sm btn-warning flex-fill" href="/editComic/<%= comic.ComicId %>">
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-sm btn-danger flex-fill" href="/deleteComic/<%= comic.ComicId %>">
+                                            Delete
+                                        </a>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+
+</html>

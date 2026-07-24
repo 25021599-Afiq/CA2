@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+<body>
+    <div class="container mt-5" style="max-width:500px">
+        <h1>Register</h1>
+        <% if (messages.length) { %>
+            <div class="alert alert-danger">
+                <%= messages[0] %>
+            </div>
+            <% } %>
+                <form action="/register" method="POST">
+                    <div class="mb-3"><label>Username</label><input class="form-control" name="username"
+                            value="<%= formData.username || '' %>" required></div>
+                    <div class="mb-3"><label>Email</label><input class="form-control" type="email" name="email"
+                            value="<%= formData.email || '' %>" required></div>
+                    <div class="mb-3"><label>Password</label><input class="form-control" type="password" name="password"
+                            required></div>
+                    <div class="mb-3"><label>Contact</label><input class="form-control" name="contact"
+                            value="<%= formData.contact || '' %>"></div>
+                    <div class="mb-3"><label for="IsAdmin">Account Type</label><select class="form-select" id="IsAdmin" name="IsAdmin" required>
+                        <option value="false" <%=formData.IsAdmin ==='false' ? 'selected' : ''%>> User </option>
+                        <option value="true" <%=formData.IsAdmin ==='true' ? 'selected' : ''%>> Admin </option>
+                    </select></div>        
+                            
+                            <button class="btn btn-primary">Register</button> <a href="/login">Login</a>
+                </form>
+    </div>
+</body>
+
+</html>

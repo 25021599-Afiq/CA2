@@ -1,0 +1,91 @@
+<%- include('partials/head') %>
+
+<body>
+
+  <main class="container my-5">
+    
+    <div class="mb-4">
+      <a href="/" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> &larr; Back to Catalog
+      </a>
+    </div>
+
+    <% if (comic) { %>
+      
+      <div class="card bg-dark border-secondary shadow-lg overflow-hidden">
+        <div class="row g-0">
+          
+          <div class="col-md-4 col-lg-3 text-center bg-black bg-opacity-25 p-4 d-flex align-items-center justify-content-center">
+            <img 
+              src="/images/<%= comic.ImagePath %>" 
+              alt="<%= comic.Series %> Issue #<%= comic.IssueNo %>" 
+              class="img-fluid rounded shadow" 
+              style="max-height: 400px; object-fit: contain;"
+            >
+          </div>
+
+          
+          <div class="col-md-8 col-lg-9 p-4 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="badge bg-secondary text-uppercase tracking-wider">Comic ID #<%= comic.ComicId %></span>
+                <% if (comic.Quantity > 0) { %>
+                  <span class="badge bg-success">In Stock (<%= comic.Quantity %> available)</span>
+                <% } else { %>
+                  <span class="badge bg-danger">Out of Stock</span>
+                <% } %>
+              </div>
+
+              <h1 class="fw-bold text-light mb-1"><%= comic.Series %></h1>
+              <h5 class="text-warning mb-4">Issue #<%= comic.IssueNo %></h5>
+
+              <hr class="border-secondary my-3">
+
+              <div class="row g-3">
+                <div class="col-6 col-sm-4">
+                  <div class="p-3 bg-black bg-opacity-25 rounded border border-secondary">
+                    <small class="text-warning d-block text-uppercase fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Publisher</small>
+                    <span class="fw-semibold text-white fs-6"><%= comic.Publisher %></span>
+                  </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                  <div class="p-3 bg-black bg-opacity-25 rounded border border-secondary">
+                    <small class="text-warning d-block text-uppercase fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Year Published</small>
+                    <span class="fw-semibold text-white fs-6"><%= comic.PublishedYear %></span>
+                  </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                  <div class="p-3 bg-black bg-opacity-25 rounded border border-secondary">
+                    <small class="text-warning d-block text-uppercase fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Amount Available</small>
+                    <span class="fw-semibold text-white fs-6"><%= comic.Quantity %> copies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top border-secondary d-flex gap-2">
+              <a href="/booking?comicId=<%= comic.ComicId %>" class="btn btn-warning fw-bold px-4">
+                Reserve Comic
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <% } else { %>
+
+      <div class="text-center py-5 my-5 bg-dark rounded border border-secondary">
+        <h3 class="text-muted">No Comic Found</h3>
+        <p class="text-secondary">The comic you are looking for does not exist or has been removed.</p>
+        <a href="/" class="btn btn-warning mt-2">Return to Catalog</a>
+      </div>
+
+    <% } %>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

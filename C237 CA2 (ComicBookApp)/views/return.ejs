@@ -1,0 +1,59 @@
+<%- include('partials/head') %>
+
+<body>
+  <%- include('partials/navbar') %>
+  <div class="container mt-5">
+    <h1>Return a Comic</h1>
+
+    <% if (errors && errors.length) { %>
+      <div class="alert alert-danger">
+        <%= errors[0] %>
+      </div>
+    <% } %>
+
+    <% if (borrowedComics.length === 0) { %>
+      <div class="alert alert-info mt-3">
+        You currently have no borrowed comics to return.
+      </div>
+    <% } else { %>
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Issue</th>
+            <th>Borrowed Qty</th>
+            <th>Borrowed Date</th>
+            <th>Due Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% borrowedComics.forEach(item => { %>
+            <tr>
+              <td><%= item.Title %></td>
+              <td><%= item.IssueNo %></td>
+              <td><%= item.BorrowedQty %></td>
+              <td><%= new Date(item.BorrowedDate).toLocaleDateString() %></td>
+              <td><%= new Date(item.DueDate).toLocaleDateString() %></td>
+              <td>
+                <form action="/return/<%= item.BorrowedId %>" method="POST" class="d-flex gap-2">
+                  <input 
+                    class="form-control" 
+                    style="width: 80px;" 
+                    type="number" 
+                    name="quantity" 
+                    min="1" 
+                    max="<%= item.BorrowedQty %>" 
+                    value="<%= item.BorrowedQty %>"
+                  >
+                  <button type="submit" class="btn btn-warning">Return</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+</body>
+</html>

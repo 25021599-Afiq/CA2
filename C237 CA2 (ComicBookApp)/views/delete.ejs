@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+
+<body>
+    <div class="container mt-5">
+        <h1>Delete Comic</h1>
+        <p>Are you sure you want to delete <strong>
+                <%= comic.Title %>
+            </strong>?</p>
+        <form action="/deleteComic/<%= comic.ComicId %>" method="POST"><button class="btn btn-danger">Yes,
+                Delete</button> <a class="btn btn-secondary" href="/comics">Cancel</a></form>
+    </div>
+</body>
+
+</html>

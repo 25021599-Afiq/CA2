@@ -1,0 +1,44 @@
+<%- include('partials/head') %>
+
+<body>
+    <%- include('partials/navbar') %>
+        <h1>Borrow a Comic</h1>
+        <% if (errors.length) { %>
+            <div class="alert alert-danger">
+                <%= errors[0] %>
+            </div>
+            <% } %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Issue</th>
+                            <th>Available</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% comics.forEach(comic=> { %><tr>
+                                <td>
+                                    <%= comic.Title %>
+                                </td>
+                                <td>
+                                    <%= comic.IssueNo %>
+                                </td>
+                                <td>
+                                    <%= comic.Quantity %>
+                                </td>
+                                <td>
+                                    <form action="/booking/<%= comic.ComicId %>" method="POST" class="d-flex gap-2">
+                                        <input class="form-control" style="width:80px" type="number" name="quantity"
+                                            min="1" max="<%= comic.Quantity %>" value="1"><button
+                                            class="btn btn-primary">Borrow</button></form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+    </div>
+</body>
+
+</html>

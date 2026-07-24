@@ -1,0 +1,51 @@
+<%- include('partials/head') %>
+
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <section class="text-center mb-4">
+          <h1 class="fw-bold">FeedBack to my monkeys</h1>
+          <p class="text-muted">
+            State progress or actions to be taken that you would want to carry forward to the future.
+          </p>
+        </section>
+        
+        <div class="card bg-dark border-secondary shadow-lg p-4">
+          <form action="/feedback/submit" method="POST">
+            
+            <div class="mb-3">
+              <label for="category" class="form-label fw-bold">Categorize Feedback</label>
+              <select id="category" name="category" class="form-select bg-dark text-light border-secondary" required>
+                <option value="" disabled selected>-- Choose Category --</option>
+                <option value="inventory">Request For Books</option>
+                <option value="interface">Interface Issue</option>
+                <option value="general">General</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label for="comments" class="form-label fw-bold">Details & Context</label>
+              <textarea 
+                id="comments" 
+                name="comments" 
+                rows="4" 
+                class="form-control bg-dark text-light border-secondary" 
+                placeholder="Describe items to stock or explain interface issues clearly..." 
+                required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-warning w-100 fw-bold py-2">
+              Submit To Registry
+            </button>
+        </form>
+    </div>
+</div>
+</main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

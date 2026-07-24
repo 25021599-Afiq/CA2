@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/comics"><img src="/images/logobttn.png" alt="Logo" width="50" height="50"> THE
+            LIBRARIUM COMICUS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <form class="d-flex me-auto" action="/search" method="GET">
+                <input class="form-control me-2" type="search" name="query" placeholder="Search database..."
+                    aria-label="Search" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/membership">Prime Membership</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/booking">Comic Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/return">Return Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/feedback">FeedBack</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/communityboard">Hive Mind</a>
+                </li>
+                
+                <% if (typeof user !=='undefined' && user.IsAdmin) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">Add Comic</a>
+                    </li>
+                    <% } %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</nav>
